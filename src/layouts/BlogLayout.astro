@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro'
 import Header from '../components/Header.astro'
+import { ViewTransitions } from 'astro:transitions';
 const title = "This is the blog section"
 const data = Astro.props
 ---
@@ -13,6 +14,7 @@ const data = Astro.props
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{data.frontmatter?.title ? data.frontmatter?.title : data.title}</title>
+        <ViewTransitions />
 	</head>
 	<body>
 		<Header title={title} />

@@ -1,13 +1,30 @@
 ---
-import { getCollection } from 'astro:content';
+import { contentfulClient } from "../../lib/contentful";
+import type { BlogPost, ImgType } from "../../lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+  });
+  return entries.items.map((entry) => ({
+    params: { slug: entry.sys.id },
+    props: { 
+        name: entry.fields.name,
+        body: documentToHtmlString(entry.fields.postBody),
+        img: entry.fields.postImage as ImgType,
+        date: new Date(entry.fields.date).toLocaleString()
+    },
   }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const {name, body, img, date} = Astro.props;
 ---
-<Content />
+
+<BlogLayout title={name}>
+    <h1>{name}</h1>
+    <time>{date}</time>
+    <p><img src={img.fields.file.url} alt={img.fields.title} /></p>
+    <article set:html={body} />
+</BlogLayout>

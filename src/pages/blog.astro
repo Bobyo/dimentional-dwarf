@@ -1,14 +1,37 @@
 ---
 import BlogLayout from '../layouts/BlogLayout.astro';
-import { getCollection, getEntry } from 'astro:content';
-const allBlogPosts = await getCollection('blog');
+// import { getCollection, getEntry } from 'astro:content';
+// const allBlogPosts = await getCollection('blog');
+
+import { contentfulClient } from "../lib/contentful";
+import type { BlogPost, ImgType } from "../lib/contentful";
+
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "blogPost",
+});
+
+const posts = entries.items.map((item) => {
+  const postID = item.sys.id;
+  const { name, date, postBody, postImage } = item.fields;
+  return {
+    postID,
+    name,
+    postBody,
+    postImage: postImage as ImgType,
+    date: new Date(date).toLocaleDateString()
+  };
+});
 ---
 <BlogLayout title="Blog Page">
     <ul>
-        {allBlogPosts.map(blogPostEntry => (
-          <li>
-            <a href={`/posts/${blogPostEntry.slug}`}>{blogPostEntry.data.title}</a>
-          </li>
-        ))}
+        {posts.map((post) => (
+            <li>
+              <a href={`/posts/${post.postID}/`}>
+                <h2>{post.name}</h2>
+              </a>
+              <time>{post.date}</time>
+              <img src={post.postImage?.fields.file.url} alt={post.postImage?.fields.title} />
+            </li>
+          ))}
       </ul>
 </BlogLayout>
