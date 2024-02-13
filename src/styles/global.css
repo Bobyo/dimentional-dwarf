@@ -48,3 +48,26 @@ nav a:hover {
     margin-bottom: 10px;
     background-color: #ff9776;
 }
+
+pre {
+    padding: 8px 16px;
+    overflow: auto;
+    border-radius: 4px;
+    background: #343434;
+  }
+  code {
+    padding: 4px;
+    border-radius: 4px;
+    background: #343434;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    direction: ltr;
+    font-size: 14px;
+  }
+  pre > code {
+    padding: 0;
+    line-height: 1.5;
+    word-break: normal;
+    white-space: pre;
+    word-spacing: normal;
+    tab-size: 4;
+  }
