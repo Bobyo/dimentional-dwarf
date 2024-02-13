@@ -6,6 +6,7 @@ export interface BlogPost {
     id: string;
   };
   fields: {
+    slug: EntryFieldTypes.Text,
     name: EntryFieldTypes.Text;
     postBody: EntryFieldTypes.RichText;
     date: EntryFieldTypes.Date;

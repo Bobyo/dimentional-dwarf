@@ -1,7 +1,5 @@
 ---
 import BlogLayout from '../layouts/BlogLayout.astro';
-// import { getCollection, getEntry } from 'astro:content';
-// const allBlogPosts = await getCollection('blog');
 
 import { contentfulClient } from "../lib/contentful";
 import type { BlogPost, ImgType } from "../lib/contentful";
@@ -11,22 +9,22 @@ const entries = await contentfulClient.getEntries<BlogPost>({
 });
 
 const posts = entries.items.map((item) => {
-  const postID = item.sys.id;
-  const { name, date, postBody, postImage } = item.fields;
+  const { slug, name, date, postBody, postImage } = item.fields;
   return {
-    postID,
+    slug,
     name,
     postBody,
     postImage: postImage as ImgType,
     date: new Date(date).toLocaleDateString()
   };
 });
+console.log(entries.items)
 ---
 <BlogLayout title="Blog Page">
     <ul>
         {posts.map((post) => (
             <li>
-              <a href={`/posts/${post.postID}/`}>
+              <a href={`/posts/${post.slug}/`}>
                 <h2>{post.name}</h2>
               </a>
               <time>{post.date}</time>
