@@ -1,71 +1,25 @@
 ---
-
+import MySiteLayout from "../layouts/MainLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				margin: 0;
-				padding: 0;
-			}
-			header {
-				background-color: #333;
-				color: #fff;
-				padding: 20px 0;
-				text-align: center;
-			}
-			nav {
-				background-color: #444;
-				color: #fff;
-				padding: 10px 0;
-				text-align: center;
-			}
-			nav a {
-				color: #fff;
-				text-decoration: none;
-				padding: 0 10px;
-			}
-			nav a:hover {
-				text-decoration: underline;
-			}
-			.container {
-				width: 80%;
-				margin: 20px auto;
-			}
-			.blog-post {
-				border-bottom: 1px solid #ccc;
-				margin-bottom: 20px;
-				padding-bottom: 20px;
-			}
-			.blog-post h2 {
-				margin-top: 0;
-			}
-		</style>
-	</head>
-	<body>
-		<header>
-			<h1>About</h1>
-		</header>
-		<nav>
-			<a href="/">Home</a>
-			<a href="/about">About</a>
-			<a href="/contact">Contact</a>
-		</nav>
-		<div class="container">
-            <div class="about-content">
-                <h2>Our Story</h2>
-                <p>Welcome to our blog! We are passionate about sharing our experiences and insights with the world.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra, velit sit amet ultrices finibus, magna enim mollis ex, ac congue est arcu at lorem. Donec convallis massa nec ipsum tincidunt vehicula. Integer auctor pharetra enim, sit amet consequat odio mattis nec. Phasellus consectetur libero non sapien fermentum mollis. </p>
-                <h2>Our Mission</h2>
-                <p>Our mission is to provide valuable content to our readers and inspire them to explore new ideas and perspectives.</p>
-            </div>
-		</div>
-	</body>
-</html>
+<MySiteLayout title="About alex">
+  <div class="about-content">
+    <h2>Our Story</h2>
+    <p>
+      Welcome to our blog! We are passionate about sharing our experiences and
+      insights with the world.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra,
+      velit sit amet ultrices finibus, magna enim mollis ex, ac congue est arcu
+      at lorem. Donec convallis massa nec ipsum tincidunt vehicula. Integer
+      auctor pharetra enim, sit amet consequat odio mattis nec. Phasellus
+      consectetur libero non sapien fermentum mollis.
+    </p>
+    <h2>Our Mission</h2>
+    <p>
+      Our mission is to provide valuable content to our readers and inspire them
+      to explore new ideas and perspectives.
+    </p>
+  </div>
+</MySiteLayout>
